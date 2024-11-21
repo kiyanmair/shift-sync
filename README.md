@@ -22,8 +22,10 @@ You will need to re-run this command if you make changes to the code.
 
 # Usage
 
-Run `shiftsync` on the config file `syncfile.yaml`:
+Run `shiftsync` on the configuration file `syncfile.yaml`:
 
 ```bash
 ./shiftsync run --config-path syncfile.yaml
 ```
+
+Please see [syncfile.example.yaml](./syncfile.example.yaml) for an example configuration file.
