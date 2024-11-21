@@ -1,6 +1,6 @@
-# Contributing to `shift-sync`
+# Contributing to Shift Sync
 
-Thank you for considering contributing to `shift-sync`!
+Thank you for considering contributing to Shift Sync!
 This project is in its early stages, and contributions are especially welcome for adding or improving source and destination integrations.
 
 ## General guidelines
