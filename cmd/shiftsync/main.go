@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -10,6 +11,7 @@ import (
 	"github.com/kiyanmair/shift-sync/config"
 	"github.com/kiyanmair/shift-sync/internal/destination"
 	"github.com/kiyanmair/shift-sync/internal/source"
+	"github.com/kiyanmair/shift-sync/internal/sync"
 )
 
 func main() {
@@ -43,6 +45,25 @@ func main() {
 					continue
 				}
 				destinations[destCfg.ID] = dest
+			}
+
+			var errs []error
+			for _, syncCfg := range cfg.Syncs {
+				err := sync.Sync(syncCfg, sources, destinations)
+				if err != nil {
+					errs = append(errs, err)
+					continue
+				}
+				log.Printf("Synced source %s to destination %s", syncCfg.SourceID, syncCfg.DestinationID)
+			}
+
+			numTotal := len(cfg.Syncs)
+			numFailed := len(errs)
+			numSuccessful := numTotal - numFailed
+
+			log.Printf("Completed %d/%d syncs", numSuccessful, numTotal)
+			if numFailed > 0 {
+				log.Fatalf("Encountered errors:\n%v", errors.Join(errs...))
 			}
 		},
 	}
