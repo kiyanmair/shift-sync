@@ -19,3 +19,11 @@ To run it, you'll need to [install Go](https://go.dev/dl/).
 
 To build `shiftsync`, run `make build` from the root of the repository.
 You will need to re-run this command if you make changes to the code.
+
+# Usage
+
+Run `shiftsync` on the config file `syncfile.yaml`:
+
+```bash
+./shiftsync run --config-path syncfile.yaml
+```
