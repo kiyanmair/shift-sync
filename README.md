@@ -5,7 +5,9 @@ For example, you can sync on-call users from a Better Stack schedule to a Slack 
 
 The guiding principle of `shift-sync`'s design is that adding new integrations should be easy.
 Simply specify the configuration details and implement the source or destination interface.
-Contributions are very welcome!
+
+We welcome contributions, especially for new source and destination integrations.
+Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on how to get started.
 
 **Status**:
 This project is in early development.
