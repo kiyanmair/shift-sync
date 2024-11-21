@@ -7,6 +7,8 @@ require (
 	github.com/spf13/cobra v1.8.1
 )
 
+require gopkg.in/yaml.v2 v2.4.0 // indirect
+
 require (
 	github.com/go-viper/mapstructure/v2 v2.2.1
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
