@@ -4,8 +4,8 @@ import (
 	"github.com/go-viper/mapstructure/v2"
 
 	"github.com/kiyanmair/shift-sync/config"
+	"github.com/kiyanmair/shift-sync/internal/core"
 	"github.com/kiyanmair/shift-sync/internal/registry"
-	"github.com/kiyanmair/shift-sync/internal/source"
 )
 
 func init() {
@@ -18,7 +18,7 @@ type ExampleSource struct {
 	ScheduleID string `mapstructure:"schedule_id"`
 }
 
-func NewExampleSource(cfg config.Source) (source.Source, error) {
+func NewExampleSource(cfg config.Source) (core.Source, error) {
 	var source ExampleSource
 	source.ID = cfg.ID
 

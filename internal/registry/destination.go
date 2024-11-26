@@ -4,16 +4,16 @@ import (
 	"fmt"
 
 	"github.com/kiyanmair/shift-sync/config"
-	"github.com/kiyanmair/shift-sync/internal/destination"
+	"github.com/kiyanmair/shift-sync/internal/core"
 )
 
-var destinationRegistry = map[string]func(config.Destination) (destination.Destination, error){}
+var destinationRegistry = map[string]func(config.Destination) (core.Destination, error){}
 
-func RegisterDestination(name string, constructor func(config.Destination) (destination.Destination, error)) {
+func RegisterDestination(name string, constructor func(config.Destination) (core.Destination, error)) {
 	destinationRegistry[name] = constructor
 }
 
-func NewDestination(config config.Destination) (destination.Destination, error) {
+func NewDestination(config config.Destination) (core.Destination, error) {
 	constructor, exists := destinationRegistry[config.Type]
 	if !exists {
 		return nil, fmt.Errorf("unsupported destination type: %s", config.Type)
