@@ -6,6 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	_ "github.com/kiyanmair/shift-sync/internal/integration"
 	"github.com/kiyanmair/shift-sync/internal/sync"
 )
 
