@@ -1,4 +1,4 @@
-package integration
+package source
 
 import (
 	"github.com/go-viper/mapstructure/v2"
