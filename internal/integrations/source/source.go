@@ -5,11 +5,10 @@ import (
 
 	"github.com/kiyanmair/shift-sync/config"
 	"github.com/kiyanmair/shift-sync/internal/core"
-	"github.com/kiyanmair/shift-sync/internal/registry"
 )
 
 func init() {
-	registry.RegisterSource("example", NewExampleSource)
+	core.RegisterSource("example", NewExampleSource)
 }
 
 type ExampleSource struct {

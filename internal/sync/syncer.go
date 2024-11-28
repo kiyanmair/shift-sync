@@ -5,7 +5,6 @@ import (
 
 	"github.com/kiyanmair/shift-sync/config"
 	"github.com/kiyanmair/shift-sync/internal/core"
-	"github.com/kiyanmair/shift-sync/internal/registry"
 )
 
 type Syncer struct {
@@ -22,7 +21,7 @@ func NewSyncer(configPath string) *Syncer {
 
 	sources := make(map[string]core.Source)
 	for _, srcCfg := range cfg.Sources {
-		src, err := registry.NewSource(srcCfg)
+		src, err := core.NewSource(srcCfg)
 		if err != nil {
 			log.Printf("Failed to create source %s: %v", srcCfg.ID, err)
 			continue
@@ -32,7 +31,7 @@ func NewSyncer(configPath string) *Syncer {
 
 	destinations := make(map[string]core.Destination)
 	for _, destCfg := range cfg.Destinations {
-		dest, err := registry.NewDestination(destCfg)
+		dest, err := core.NewDestination(destCfg)
 		if err != nil {
 			log.Printf("Failed to create destination %s: %v", destCfg.ID, err)
 			continue

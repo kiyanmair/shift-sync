@@ -5,11 +5,10 @@ import (
 
 	"github.com/kiyanmair/shift-sync/config"
 	"github.com/kiyanmair/shift-sync/internal/core"
-	"github.com/kiyanmair/shift-sync/internal/registry"
 )
 
 func init() {
-	registry.RegisterDestination("example", NewExampleDestination)
+	core.RegisterDestination("example", NewExampleDestination)
 }
 
 type ExampleDestination struct {
