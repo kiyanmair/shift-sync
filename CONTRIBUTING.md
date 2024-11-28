@@ -54,6 +54,7 @@ This project is in its early stages, and contributions are especially welcome fo
     Implement the relevant interface for your integration.
     For sources, this will be `Source`, requiring an `FetchUsers` method.
     For destinations, this will be `Destination`, requiring an `UpdateUsers` method.
+    Please do not use integration-specific external packages like SDKs, to minimise dependencies.
 
 1. **Register your constructor**
 
