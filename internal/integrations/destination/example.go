@@ -3,7 +3,7 @@ package destination
 import (
 	"github.com/go-viper/mapstructure/v2"
 
-	"github.com/kiyanmair/shift-sync/config"
+	"github.com/kiyanmair/shift-sync/internal/config"
 	"github.com/kiyanmair/shift-sync/internal/core"
 )
 

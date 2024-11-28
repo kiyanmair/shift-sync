@@ -1,6 +1,6 @@
 package core
 
-import "github.com/kiyanmair/shift-sync/config"
+import "github.com/kiyanmair/shift-sync/internal/config"
 
 type sourceConstructor func(config.Source) (Source, error)
 type destinationConstructor func(config.Destination) (Destination, error)
