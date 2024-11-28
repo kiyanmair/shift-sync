@@ -20,6 +20,11 @@ This project is in its early stages, and contributions are especially welcome fo
     Ensure that your changes work how you expect them to.
     At this point in time, there are no automated tests.
 
+1. **Format your code**
+
+    Run `go fmt` to format your Go files for consistency.
+    Most IDEs will do this for you if you have Go language features enabled.
+
 1. **Open a pull request**
    
    Once you're ready, open a pull request (PR) in this repository.
@@ -30,7 +35,8 @@ This project is in its early stages, and contributions are especially welcome fo
 
 1. **Create a new integration file**
 
-    Create a new Go file in [internal/source](./internal/source/) or [internal/destination](./internal/destination/) named with your integration type.
+    Create a new Go file in [internal/integrations/source](./internal/integrations/source/) or [internal/integrations/destination](./internal/integrations/destination/), named with the format `integrationname.go`.
+    You should strongly consider duplicating the `example.go` file in the same directory, as there is some boilerplate involved.
 
 1. **Define your required fields**
 
@@ -38,11 +44,10 @@ This project is in its early stages, and contributions are especially welcome fo
     It must have an `ID string` field.
     You can define any other fields you'd like, using `mapstructure` struct tags to indicate their corresponding YAML field name.
 
-1. **Create a constructor**
+1. **Rename your constructor**
 
-    Create a constructor for your new type.
-    The constructor should set the `ID` field to `cfg.ID`, then use `mapstructure` to decode `cfg.Details` into your custom fields.
-    You can essentially copy the constructor from `example.go` in the same directory and modify it to reference your integration name.
+    Rename the example constructor to reflect your integration name.
+    You should not have to make changes to the constructor implementation.
 
 1. **Implement the interface**
 
@@ -52,5 +57,5 @@ This project is in its early stages, and contributions are especially welcome fo
 
 1. **Register your constructor**
 
-    Add your constructor function to the `switch` statement in either [source.go](./internal/source/source.go) or [destination.go](./internal/destination/destination.go).
-    Use the integration's type as the `case` value.
+    Update the example `init` function body to reference your integration name and constructor function.
+    The name should have the format `integration_name` and will match against `type` values in the configuration file.
