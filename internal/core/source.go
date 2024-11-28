@@ -3,7 +3,7 @@ package core
 import (
 	"fmt"
 
-	"github.com/kiyanmair/shift-sync/config"
+	"github.com/kiyanmair/shift-sync/internal/config"
 )
 
 type Source interface {

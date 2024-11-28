@@ -3,7 +3,7 @@ package sync
 import (
 	"log"
 
-	"github.com/kiyanmair/shift-sync/config"
+	"github.com/kiyanmair/shift-sync/internal/config"
 	"github.com/kiyanmair/shift-sync/internal/core"
 )
 

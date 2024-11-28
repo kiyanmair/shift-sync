@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/kiyanmair/shift-sync/config"
+	"github.com/kiyanmair/shift-sync/internal/config"
 )
 
 func (s *Syncer) RunSyncs() {
