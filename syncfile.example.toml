@@ -1,0 +1,13 @@
+[sources.example_schedule]
+type = "example"
+api_key = "example-api-key"
+schedule_id = "schedule-123"
+
+[destinations.example_group]
+type = "example"
+token = "example-token"
+group_id = "team-abc"
+
+[[syncs]]
+destination = "example_group"
+source = "example_schedule"
