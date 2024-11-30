@@ -13,8 +13,8 @@ func LoadConfig(path string) (*Config, error) {
 		return nil, err
 	}
 
-	// Unmarshal into a generic map to avoid losing unmapped fields
-	// This is because integrations can have arbitrary fields
+	// Unmarshal into a generic map to avoid losing unmapped fields,
+	// which exist because integrations can have arbitrary fields
 	var rawConfig map[string]interface{}
 	if err := toml.Unmarshal(data, &rawConfig); err != nil {
 		return nil, err
