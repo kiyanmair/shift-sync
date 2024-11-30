@@ -12,20 +12,16 @@ func init() {
 }
 
 type ExampleSource struct {
-	ID         string
 	APIKey     string `mapstructure:"api_key"`
 	ScheduleID string `mapstructure:"schedule_id"`
 }
 
 func NewExampleSource(cfg config.Source) (core.Source, error) {
-	var source ExampleSource
-	source.ID = cfg.ID
-
-	if err := mapstructure.Decode(cfg.Details, &source); err != nil {
+	var src ExampleSource
+	if err := mapstructure.Decode(cfg.Extras, &src); err != nil {
 		return nil, err
 	}
-
-	return &source, nil
+	return &src, nil
 }
 
 func (s *ExampleSource) FetchUsers() ([]string, error) {

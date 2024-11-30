@@ -1,25 +1,22 @@
 package config
 
 type Config struct {
-	Sources      []Source      `yaml:"sources"`
-	Destinations []Destination `yaml:"destinations"`
-	Syncs        []Sync        `yaml:"syncs"`
+	Sources      map[string]Source      `mapstructure:"sources"`
+	Destinations map[string]Destination `mapstructure:"destinations"`
+	Syncs        []Sync                 `mapstructure:"syncs"`
 }
 
 type Source struct {
-	ID      string                 `yaml:"id"`
-	Type    string                 `yaml:"type"`
-	Details map[string]interface{} `yaml:"details"`
+	Type   string                 `mapstructure:"type"`
+	Extras map[string]interface{} `mapstructure:",remain"`
 }
 
 type Destination struct {
-	ID      string                 `yaml:"id"`
-	Type    string                 `yaml:"type"`
-	Details map[string]interface{} `yaml:"details"`
+	Type   string                 `mapstructure:"type"`
+	Extras map[string]interface{} `mapstructure:",remain"`
 }
 
 type Sync struct {
-	ID            string `yaml:"id"`
-	DestinationID string `yaml:"destination_id"`
-	SourceID      string `yaml:"source_id"`
+	Source      string `mapstructure:"source"`
+	Destination string `mapstructure:"destination"`
 }

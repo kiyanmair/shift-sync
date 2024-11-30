@@ -12,7 +12,7 @@ Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on how to get sta
 **Status**:
 This project is in early development.
 While the core framework is functional, expect breaking changes as the design is refined.
-We follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and are in the [major version zero](https://semver.org/spec/v2.0.0.html#spec-item-4).
+We follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and are in [major version zero](https://semver.org/spec/v2.0.0.html#spec-item-4).
 
 # Installation
 
@@ -24,10 +24,10 @@ You will need to re-run this command if you make changes to the code.
 
 # Usage
 
-Run `shiftsync` on the configuration file `syncfile.yaml`:
+Run `shiftsync` on the configuration file `syncfile.toml`:
 
 ```bash
-./shiftsync run --config-path syncfile.yaml
+./shiftsync run --config-path syncfile.toml
 ```
 
-Please see [syncfile.example.yaml](./syncfile.example.yaml) for an example configuration file.
+Please see [syncfile.example.toml](./syncfile.example.toml) for an example configuration file.

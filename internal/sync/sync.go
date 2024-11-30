@@ -14,7 +14,7 @@ func (s *Syncer) RunSyncs() {
 		if err := s.singleSync(syncCfg); err != nil {
 			errs = append(errs, err)
 		} else {
-			log.Printf("Synced source %s to destination %s", syncCfg.SourceID, syncCfg.DestinationID)
+			log.Printf("Synced source %s to destination %s", syncCfg.Source, syncCfg.Destination)
 		}
 	}
 
@@ -29,23 +29,23 @@ func (s *Syncer) RunSyncs() {
 }
 
 func (s *Syncer) singleSync(syncCfg config.Sync) error {
-	source, exists := s.sources[syncCfg.SourceID]
+	source, exists := s.sources[syncCfg.Source]
 	if !exists {
-		return fmt.Errorf("source %s not found", syncCfg.SourceID)
+		return fmt.Errorf("source %s not found", syncCfg.Source)
 	}
 
-	dest, exists := s.destinations[syncCfg.DestinationID]
+	dest, exists := s.destinations[syncCfg.Destination]
 	if !exists {
-		return fmt.Errorf("destination %s not found", syncCfg.DestinationID)
+		return fmt.Errorf("destination %s not found", syncCfg.Destination)
 	}
 
 	users, err := source.FetchUsers()
 	if err != nil {
-		return fmt.Errorf("failed to fetch users for source %s: %w", syncCfg.SourceID, err)
+		return fmt.Errorf("failed to fetch users for source %s: %w", syncCfg.Source, err)
 	}
 
 	if err := dest.UpdateUsers(users); err != nil {
-		return fmt.Errorf("failed to update users for destination %s: %w", syncCfg.DestinationID, err)
+		return fmt.Errorf("failed to update users for destination %s: %w", syncCfg.Destination, err)
 	}
 
 	return nil

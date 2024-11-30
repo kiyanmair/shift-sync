@@ -2,7 +2,7 @@
 /shiftsync
 
 # Config file
-syncfile.yaml
+syncfile.toml
 
 ### GO DEFAULTS ###
 
