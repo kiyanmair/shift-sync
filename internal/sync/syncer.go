@@ -20,23 +20,23 @@ func NewSyncer(configPath string) *Syncer {
 	}
 
 	sources := make(map[string]core.Source)
-	for _, srcCfg := range cfg.Sources {
+	for srcName, srcCfg := range cfg.Sources {
 		src, err := core.NewSource(srcCfg)
 		if err != nil {
-			log.Printf("Failed to create source %s: %v", srcCfg.ID, err)
+			log.Printf("Failed to create source %s: %v", srcName, err)
 			continue
 		}
-		sources[srcCfg.ID] = src
+		sources[srcName] = src
 	}
 
 	destinations := make(map[string]core.Destination)
-	for _, destCfg := range cfg.Destinations {
+	for destName, destCfg := range cfg.Destinations {
 		dest, err := core.NewDestination(destCfg)
 		if err != nil {
-			log.Printf("Failed to create destination %s: %v", destCfg.ID, err)
+			log.Printf("Failed to create destination %s: %v", destName, err)
 			continue
 		}
-		destinations[destCfg.ID] = dest
+		destinations[destName] = dest
 	}
 
 	syncer := Syncer{
