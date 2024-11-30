@@ -41,8 +41,8 @@ This project is in its early stages, and contributions are especially welcome fo
 1. **Define your required fields**
 
     Define a `struct` type in your integration file.
-    It must have an `ID string` field.
-    You can define any other fields you'd like, using `mapstructure` struct tags to indicate their corresponding YAML field name.
+    You can define any fields you'd like, using `mapstructure` struct tags to indicate their corresponding TOML field name.
+    Don't include the `type` configuration field; this indicates the corresponding integration, but does not populate the struct.
 
 1. **Rename your constructor**
 
