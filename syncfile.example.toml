@@ -9,5 +9,5 @@ token = "example-token"
 group_id = "team-abc"
 
 [[syncs]]
-destination = "example_group"
 source = "example_schedule"
+destination = "example_group"
