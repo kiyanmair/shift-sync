@@ -7,7 +7,7 @@ import (
 )
 
 type Destination interface {
-	UpdateUsers(users []string) error
+	SetUsers(users []string) error
 }
 
 func NewDestination(config config.Destination) (Destination, error) {

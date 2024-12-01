@@ -39,12 +39,12 @@ func (s *Syncer) singleSync(syncCfg config.Sync) error {
 		return fmt.Errorf("destination %s not found", syncCfg.Destination)
 	}
 
-	users, err := source.FetchUsers()
+	users, err := source.GetUsers()
 	if err != nil {
 		return fmt.Errorf("failed to fetch users for source %s: %w", syncCfg.Source, err)
 	}
 
-	if err := dest.UpdateUsers(users); err != nil {
+	if err := dest.SetUsers(users); err != nil {
 		return fmt.Errorf("failed to update users for destination %s: %w", syncCfg.Destination, err)
 	}
 

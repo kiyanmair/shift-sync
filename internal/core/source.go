@@ -7,7 +7,7 @@ import (
 )
 
 type Source interface {
-	FetchUsers() ([]string, error)
+	GetUsers() ([]string, error)
 }
 
 func NewSource(config config.Source) (Source, error) {

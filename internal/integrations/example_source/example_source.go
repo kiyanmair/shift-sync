@@ -24,6 +24,6 @@ func NewExampleSource(cfg config.Source) (core.Source, error) {
 	return &src, nil
 }
 
-func (s *ExampleSource) FetchUsers() ([]string, error) {
+func (s *ExampleSource) GetUsers() ([]string, error) {
 	return []string{"user@example.com"}, nil
 }

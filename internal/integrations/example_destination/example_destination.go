@@ -24,6 +24,6 @@ func NewExampleDestination(cfg config.Destination) (core.Destination, error) {
 	return &dest, nil
 }
 
-func (d *ExampleDestination) UpdateUsers(users []string) error {
+func (d *ExampleDestination) SetUsers(users []string) error {
 	return nil
 }
