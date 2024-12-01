@@ -5,9 +5,11 @@ type Integration interface {
 }
 
 type Source interface {
+	Integration
 	GetUsers() ([]string, error)
 }
 
 type Destination interface {
+	Integration
 	SetUsers(users []string) error
 }
