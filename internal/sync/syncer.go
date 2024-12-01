@@ -1,6 +1,7 @@
 package sync
 
 import (
+	"errors"
 	"log"
 
 	"github.com/kiyanmair/shift-sync/internal/config"
@@ -19,38 +20,19 @@ func NewSyncer(configPath string) *Syncer {
 		log.Fatalf("Failed to load config: %v", err)
 	}
 
-	sources := make(map[string]core.Source)
-	for srcName, srcCfg := range cfg.Sources {
-		integ, err := core.NewIntegration(srcCfg)
-		if err != nil {
-			log.Printf("Failed to create integration %s: %v", srcName, err)
-			continue
-		}
+	sources, srcErrs := core.CreateIntegrations(
+		cfg.Sources,
+		core.AsSource,
+	)
 
-		src, ok := core.AsSource(integ)
-		if !ok {
-			log.Printf("Integration type %s cannot be used as a source", srcCfg.Type)
-			continue
-		}
+	destinations, destErrs := core.CreateIntegrations(
+		cfg.Destinations,
+		core.AsDestination,
+	)
 
-		sources[srcName] = src
-	}
-
-	destinations := make(map[string]core.Destination)
-	for destName, destCfg := range cfg.Destinations {
-		integ, err := core.NewIntegration(destCfg)
-		if err != nil {
-			log.Printf("Failed to create integration %s: %v", destName, err)
-			continue
-		}
-
-		dest, ok := core.AsDestination(integ)
-		if !ok {
-			log.Printf("Integration type %s cannot be used as a destination", destCfg.Type)
-			continue
-		}
-
-		destinations[destName] = dest
+	errs := append(srcErrs, destErrs...)
+	if len(errs) > 0 {
+		log.Fatalf("Encountered errors while initialising:\n%v", errors.Join(errs...))
 	}
 
 	syncer := Syncer{

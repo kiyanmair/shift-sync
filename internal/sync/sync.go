@@ -24,7 +24,7 @@ func (s *Syncer) RunSyncs() {
 
 	log.Printf("Completed %d/%d syncs", numSuccessful, numTotal)
 	if numFailed > 0 {
-		log.Fatalf("Encountered errors:\n%v", errors.Join(errs...))
+		log.Fatalf("Encountered errors while syncing:\n%v", errors.Join(errs...))
 	}
 }
 
