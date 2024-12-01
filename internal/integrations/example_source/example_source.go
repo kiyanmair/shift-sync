@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	core.RegisterSource("example_source", NewExampleSource)
+	core.RegisterIntegration("example_source", NewExampleSource)
 }
 
 type ExampleSource struct {
@@ -18,7 +18,7 @@ type ExampleSource struct {
 	ScheduleID string `mapstructure:"schedule_id"`
 }
 
-func NewExampleSource(cfg config.Integration) (core.Source, error) {
+func NewExampleSource(cfg config.Integration) (core.Integration, error) {
 	var src ExampleSource
 	if err := mapstructure.Decode(cfg.Extras, &src); err != nil {
 		return nil, err

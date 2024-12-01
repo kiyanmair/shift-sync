@@ -21,21 +21,35 @@ func NewSyncer(configPath string) *Syncer {
 
 	sources := make(map[string]core.Source)
 	for srcName, srcCfg := range cfg.Sources {
-		src, err := core.NewSource(srcCfg)
+		integ, err := core.NewIntegration(srcCfg)
 		if err != nil {
-			log.Printf("Failed to create source %s: %v", srcName, err)
+			log.Printf("Failed to create integration %s: %v", srcName, err)
 			continue
 		}
+
+		src, ok := integ.(core.Source)
+		if !ok {
+			log.Printf("Integration type %s cannot be used as a source", srcCfg.Type)
+			continue
+		}
+
 		sources[srcName] = src
 	}
 
 	destinations := make(map[string]core.Destination)
 	for destName, destCfg := range cfg.Destinations {
-		dest, err := core.NewDestination(destCfg)
+		integ, err := core.NewIntegration(destCfg)
 		if err != nil {
-			log.Printf("Failed to create destination %s: %v", destName, err)
+			log.Printf("Failed to create integration %s: %v", destName, err)
 			continue
 		}
+
+		dest, ok := integ.(core.Destination)
+		if !ok {
+			log.Printf("Integration type %s cannot be used as a destination", destCfg.Type)
+			continue
+		}
+
 		destinations[destName] = dest
 	}
 
