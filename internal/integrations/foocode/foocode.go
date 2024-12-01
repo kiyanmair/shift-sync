@@ -27,15 +27,17 @@ func NewFooCode(cfg config.Integration) (core.Integration, error) {
 	return &src, nil
 }
 
-func (i *FooCode) Valid() (bool, error) {
+func (i *FooCode) Valid(direction core.IntegrationDirection) (bool, error) {
 	if i.APIKey == "" {
 		return false, errors.New("api_key cannot be empty")
 	}
 	if i.TeamName == "" {
 		return false, errors.New("schedule_id cannot be empty")
 	}
-	if core.IsDestination(i) && i.Role == "" {
-		return false, errors.New("role cannot be empty")
+	if direction == core.DestinationDirection {
+		if i.Role == "" {
+			return false, errors.New("role cannot be empty")
+		}
 	}
 	return true, nil
 }

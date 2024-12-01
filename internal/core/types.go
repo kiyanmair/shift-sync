@@ -1,7 +1,7 @@
 package core
 
 type Integration interface {
-	Valid() (bool, error)
+	Valid(direction IntegrationDirection) (bool, error)
 }
 
 type Source interface {
