@@ -1,10 +1,10 @@
 [sources.example_schedule]
-type = "example"
+type = "example_source"
 api_key = "example-api-key"
 schedule_id = "schedule-123"
 
 [destinations.example_group]
-type = "example"
+type = "example_destination"
 token = "example-token"
 group_id = "team-abc"
 

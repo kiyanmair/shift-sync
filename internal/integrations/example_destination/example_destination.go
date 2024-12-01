@@ -8,7 +8,7 @@ import (
 )
 
 func init() {
-	core.RegisterDestination("example", NewExampleDestination)
+	core.RegisterDestination("example_destination", NewExampleDestination)
 }
 
 type ExampleDestination struct {

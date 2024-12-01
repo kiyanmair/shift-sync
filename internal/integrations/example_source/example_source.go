@@ -8,7 +8,7 @@ import (
 )
 
 func init() {
-	core.RegisterSource("example", NewExampleSource)
+	core.RegisterSource("example_source", NewExampleSource)
 }
 
 type ExampleSource struct {
