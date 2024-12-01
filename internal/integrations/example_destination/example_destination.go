@@ -18,7 +18,7 @@ type ExampleDestination struct {
 	GroupID string `mapstructure:"group_id"`
 }
 
-func NewExampleDestination(cfg config.Destination) (core.Destination, error) {
+func NewExampleDestination(cfg config.Integration) (core.Destination, error) {
 	var dest ExampleDestination
 	if err := mapstructure.Decode(cfg.Extras, &dest); err != nil {
 		return nil, err

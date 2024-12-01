@@ -18,7 +18,7 @@ type ExampleSource struct {
 	ScheduleID string `mapstructure:"schedule_id"`
 }
 
-func NewExampleSource(cfg config.Source) (core.Source, error) {
+func NewExampleSource(cfg config.Integration) (core.Source, error) {
 	var src ExampleSource
 	if err := mapstructure.Decode(cfg.Extras, &src); err != nil {
 		return nil, err

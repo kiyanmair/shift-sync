@@ -6,7 +6,7 @@ import (
 	"github.com/kiyanmair/shift-sync/internal/config"
 )
 
-func NewSource(config config.Source) (Source, error) {
+func NewSource(config config.Integration) (Source, error) {
 	constructor, exists := sourceRegistry[config.Type]
 	if !exists {
 		return nil, fmt.Errorf("unsupported source type: %s", config.Type)

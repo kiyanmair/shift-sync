@@ -6,7 +6,7 @@ import (
 	"github.com/kiyanmair/shift-sync/internal/config"
 )
 
-func NewDestination(config config.Destination) (Destination, error) {
+func NewDestination(config config.Integration) (Destination, error) {
 	constructor, exists := destinationRegistry[config.Type]
 	if !exists {
 		return nil, fmt.Errorf("unsupported destination type: %s", config.Type)
