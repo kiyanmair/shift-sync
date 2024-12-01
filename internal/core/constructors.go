@@ -6,18 +6,6 @@ import (
 	"github.com/kiyanmair/shift-sync/internal/config"
 )
 
-func NewIntegration(config config.Integration) (Integration, error) {
-	constructor, exists := integrationRegistry[config.Type]
-	if !exists {
-		return nil, fmt.Errorf("unsupported integration type: %s", config.Type)
-	}
-	integ, err := constructor(config)
-	if err != nil {
-		return nil, fmt.Errorf("failed to construct integration: %w", err)
-	}
-	return integ, nil
-}
-
 func CreateIntegrations[T Integration](
 	configs map[string]config.Integration,
 	direction IntegrationDirection,
@@ -26,9 +14,15 @@ func CreateIntegrations[T Integration](
 	var errs []error
 
 	for name, cfg := range configs {
-		integ, err := NewIntegration(cfg)
+		constructor, exists := integrationRegistry[cfg.Type]
+		if !exists {
+			errs = append(errs, fmt.Errorf("unsupported integration type: %s", cfg.Type))
+			continue
+		}
+
+		integ, err := constructor(cfg)
 		if err != nil {
-			errs = append(errs, fmt.Errorf("failed to create %s: %v", name, err))
+			errs = append(errs, fmt.Errorf("failed to construct integration: %w", err))
 			continue
 		}
 
