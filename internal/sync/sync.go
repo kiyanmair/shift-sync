@@ -29,7 +29,7 @@ func (s *Syncer) RunSyncs() {
 }
 
 func (s *Syncer) singleSync(syncCfg config.Sync) error {
-	source, exists := s.sources[syncCfg.Source]
+	src, exists := s.sources[syncCfg.Source]
 	if !exists {
 		return fmt.Errorf("source %s not found", syncCfg.Source)
 	}
@@ -39,7 +39,7 @@ func (s *Syncer) singleSync(syncCfg config.Sync) error {
 		return fmt.Errorf("destination %s not found", syncCfg.Destination)
 	}
 
-	users, err := source.GetUsers()
+	users, err := src.GetUsers()
 	if err != nil {
 		return fmt.Errorf("failed to fetch users for source %s: %w", syncCfg.Source, err)
 	}
