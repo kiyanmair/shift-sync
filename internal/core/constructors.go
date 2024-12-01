@@ -38,8 +38,7 @@ func CreateIntegrations[T Integration](
 			continue
 		}
 
-		valid, err := integ.Valid(direction)
-		if !valid {
+		if err := integ.Validate(direction); err != nil {
 			errs = append(errs, fmt.Errorf("definition for %s (type %s) is invalid: %v", name, cfg.Type, err))
 			continue
 		}

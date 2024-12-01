@@ -27,19 +27,19 @@ func NewFooChat(cfg config.Integration) (core.Integration, error) {
 	return &dest, nil
 }
 
-func (i *FooChat) Valid(direction core.IntegrationDirection) (bool, error) {
+func (i *FooChat) Validate(direction core.IntegrationDirection) error {
 	if i.Token == "" {
-		return false, errors.New("token cannot be empty")
+		return errors.New("token cannot be empty")
 	}
 	if i.GroupID == "" {
-		return false, errors.New("group_id cannot be empty")
+		return errors.New("group_id cannot be empty")
 	}
 	if direction == core.SourceDirection {
 		if len(i.Include) == 0 {
-			return false, errors.New("include cannot be empty")
+			return errors.New("include cannot be empty")
 		}
 	}
-	return true, nil
+	return nil
 }
 
 func (i *FooChat) GetUsers() ([]string, error) {

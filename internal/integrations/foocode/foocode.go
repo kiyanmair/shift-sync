@@ -27,19 +27,19 @@ func NewFooCode(cfg config.Integration) (core.Integration, error) {
 	return &src, nil
 }
 
-func (i *FooCode) Valid(direction core.IntegrationDirection) (bool, error) {
+func (i *FooCode) Validate(direction core.IntegrationDirection) error {
 	if i.APIKey == "" {
-		return false, errors.New("api_key cannot be empty")
+		return errors.New("api_key cannot be empty")
 	}
 	if i.TeamName == "" {
-		return false, errors.New("schedule_id cannot be empty")
+		return errors.New("schedule_id cannot be empty")
 	}
 	if direction == core.DestinationDirection {
 		if i.Role == "" {
-			return false, errors.New("role cannot be empty")
+			return errors.New("role cannot be empty")
 		}
 	}
-	return true, nil
+	return nil
 }
 
 func (i *FooCode) GetUsers() ([]string, error) {
