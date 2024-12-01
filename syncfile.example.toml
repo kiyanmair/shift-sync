@@ -1,13 +1,15 @@
-[sources.example_schedule]
-type = "example_source"
-api_key = "example-api-key"
-schedule_id = "schedule-123"
+[sources.chat_group]
+type = "foochat"
+token = "foochat-token"
+group_id = "group-123"
+include = ["admin", "owner"]
 
-[destinations.example_group]
-type = "example_destination"
-token = "example-token"
-group_id = "team-abc"
+[destinations.code_team]
+type = "foocode"
+api_key = "foocode-api-key"
+team_name = "team-abc"
+role = "member"
 
 [[syncs]]
-source = "example_schedule"
-destination = "example_group"
+source = "chat_group"
+destination = "code_team"
