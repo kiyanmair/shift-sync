@@ -1,6 +1,7 @@
 package sync
 
 import (
+	"errors"
 	"log"
 
 	"github.com/kiyanmair/shift-sync/internal/config"
@@ -19,24 +20,19 @@ func NewSyncer(configPath string) *Syncer {
 		log.Fatalf("Failed to load config: %v", err)
 	}
 
-	sources := make(map[string]core.Source)
-	for srcName, srcCfg := range cfg.Sources {
-		src, err := core.NewSource(srcCfg)
-		if err != nil {
-			log.Printf("Failed to create source %s: %v", srcName, err)
-			continue
-		}
-		sources[srcName] = src
-	}
+	sources, srcErrs := core.CreateIntegrations[core.Source](
+		cfg.Sources,
+		core.SourceDirection,
+	)
 
-	destinations := make(map[string]core.Destination)
-	for destName, destCfg := range cfg.Destinations {
-		dest, err := core.NewDestination(destCfg)
-		if err != nil {
-			log.Printf("Failed to create destination %s: %v", destName, err)
-			continue
-		}
-		destinations[destName] = dest
+	destinations, destErrs := core.CreateIntegrations[core.Destination](
+		cfg.Destinations,
+		core.DestinationDirection,
+	)
+
+	errs := append(srcErrs, destErrs...)
+	if len(errs) > 0 {
+		log.Fatalf("Encountered errors while initialising:\n%v", errors.Join(errs...))
 	}
 
 	syncer := Syncer{

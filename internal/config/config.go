@@ -1,17 +1,12 @@
 package config
 
 type Config struct {
-	Sources      map[string]Source      `mapstructure:"sources"`
-	Destinations map[string]Destination `mapstructure:"destinations"`
+	Sources      map[string]Integration `mapstructure:"sources"`
+	Destinations map[string]Integration `mapstructure:"destinations"`
 	Syncs        []Sync                 `mapstructure:"syncs"`
 }
 
-type Source struct {
-	Type   string                 `mapstructure:"type"`
-	Extras map[string]interface{} `mapstructure:",remain"`
-}
-
-type Destination struct {
+type Integration struct {
 	Type   string                 `mapstructure:"type"`
 	Extras map[string]interface{} `mapstructure:",remain"`
 }

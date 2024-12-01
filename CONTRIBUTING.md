@@ -1,7 +1,7 @@
 # Contributing to Shift Sync
 
 Thank you for considering contributing to Shift Sync!
-This project is in its early stages, and contributions are especially welcome for adding or improving source and destination integrations.
+This project is in its early stages, and contributions are especially welcome for adding or improving integrations.
 
 ## General guidelines
 
@@ -19,10 +19,11 @@ This project is in its early stages, and contributions are especially welcome fo
 
     Ensure that your changes work how you expect them to.
     At this point in time, there are no automated tests.
+    However, you are welcome to contribute them.
 
-1. **Format your code**
+1. **Format the code**
 
-    Run `go fmt` to format your Go files for consistency.
+    Run `go fmt` to format the Go files for consistency.
     Most IDEs will do this for you if you have Go language features enabled.
 
 1. **Open a pull request**
@@ -33,30 +34,45 @@ This project is in its early stages, and contributions are especially welcome fo
 
 ## Adding a new integration
 
-1. **Create a new integration file**
+1. **Create a new integration directory**
 
-    Create a new Go file in [internal/integrations/source](./internal/integrations/source/) or [internal/integrations/destination](./internal/integrations/destination/), named with the format `integrationname.go`.
-    You should strongly consider duplicating the `example.go` file in the same directory, as there is some boilerplate involved.
+    Create a new directory in [internal/integrations](./internal/integrations/), named with the format `integrationname`.
+    You should strongly consider duplicating [foochat](./internal/integrations/foochat/), as there is some boilerplate involved.
+    The integration code will have to be in `.go` files, which you can name according to their contents.
 
-1. **Define your required fields**
+1. **Name the Go package**
 
-    Define a `struct` type in your integration file.
-    You can define any fields you'd like, using `mapstructure` struct tags to indicate their corresponding TOML field name.
+    Provide the package name at the top of all of the integration's `.go` files.
+    Use the same format as the directory name, i.e. `package integrationname`.
+
+1. **Define the supplied fields**
+
+    Define a `struct` type for the integration's supplied fields, named with the format `IntegrationName`.
+    Use `mapstructure` struct tags to indicate each struct field's corresponding TOML field name.
     Don't include the `type` configuration field; this indicates the corresponding integration, but does not populate the struct.
 
-1. **Rename your constructor**
+1. **Update the constructor**
 
-    Rename the example constructor to reflect your integration name.
-    You should not have to make changes to the constructor implementation.
+    Rename the duplicated constructor with the format `NewIntegrationName`.
+    Change the type of the `i` variable to your struct type.
+    You should not have to make additional changes to the constructor implementation.
+
+1. **Register the constructor**
+
+    Update the duplicated `init` function body to reference the integration name and constructor function.
+    The name should have the format `integration_name` and will match against `type` values in the configuration file.
+    Add a blank import to [importer.go](./internal/integrations/importer.go) for the integration directory.
 
 1. **Implement the interface**
 
-    Implement the relevant interface for your integration.
-    For sources, this will be `Source`, requiring an `FetchUsers` method.
-    For destinations, this will be `Destination`, requiring an `UpdateUsers` method.
+    Implement the relevant interfaces for the integration.
+    Source systems will require a `FetchUsers` method.
+    Destination systems will require an `UpdateUsers` method.
+    Bidirectional systems will require both of these methods.
     Please do not use integration-specific external packages like SDKs, to minimise dependencies.
 
-1. **Register your constructor**
+1. **Implement struct validation**
 
-    Update the example `init` function body to reference your integration name and constructor function.
-    The name should have the format `integration_name` and will match against `type` values in the configuration file.
+    Implement the `Validate` method, returning a descriptive error for any invalid configuration values.
+    Bidirectional integrations may require different validity rules depending on whether the integration is being used as a source or destination.
+    In this case, check the value of `direction` before performing direction-specific validation.
