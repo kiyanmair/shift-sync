@@ -1,12 +1,11 @@
 # Shift Sync
 
-Shift Sync is a tool for syncing on-shift users between arbitrary systems.
-For example, you can sync on-call users from a Better Stack schedule to a Slack group.
+Shift Sync is a tool for syncing users between arbitrary systems.
+Any system can be integrated as long as it can get and/or set email addresses.
+However, the primary focus is on syncing on-shift users from scheduling systems to taggable sources.
 
-The guiding principle of Shift Sync's design is that adding new integrations should be easy.
-Simply specify the configuration details and implement the source or destination interface.
-
-We welcome contributions, especially for new source and destination integrations.
+The guiding principle of Shift Sync's design is that implementing integrations should be easy.
+We welcome contributions, especially for adding or improving integrations.
 Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on how to get started.
 
 **Status**:
