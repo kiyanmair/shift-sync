@@ -23,11 +23,13 @@ func NewSyncer(configPath string) *Syncer {
 	sources, srcErrs := core.CreateIntegrations(
 		cfg.Sources,
 		core.AsSource,
+		core.SourceDirection,
 	)
 
 	destinations, destErrs := core.CreateIntegrations(
 		cfg.Destinations,
 		core.AsDestination,
+		core.DestinationDirection,
 	)
 
 	errs := append(srcErrs, destErrs...)

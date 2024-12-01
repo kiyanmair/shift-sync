@@ -21,6 +21,7 @@ func NewIntegration(config config.Integration) (Integration, error) {
 func CreateIntegrations[T Integration](
 	configs map[string]config.Integration,
 	assert func(Integration) (T, bool),
+	direction IntegrationDirection,
 ) (map[string]T, []error) {
 	results := make(map[string]T)
 	var errs []error
@@ -34,7 +35,7 @@ func CreateIntegrations[T Integration](
 
 		instance, ok := assert(integ)
 		if !ok {
-			errs = append(errs, fmt.Errorf("cannot use integration type %s in this direction", cfg.Type))
+			errs = append(errs, fmt.Errorf("cannot use integration type %s as a %s", cfg.Type, direction))
 			continue
 		}
 

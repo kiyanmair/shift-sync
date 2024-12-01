@@ -13,3 +13,10 @@ type Destination interface {
 	Integration
 	SetUsers(users []string) error
 }
+
+type IntegrationDirection string
+
+const (
+	SourceDirection      IntegrationDirection = "source"
+	DestinationDirection IntegrationDirection = "destination"
+)
