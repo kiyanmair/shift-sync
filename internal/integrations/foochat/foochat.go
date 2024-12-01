@@ -20,11 +20,11 @@ type FooChat struct {
 }
 
 func NewFooChat(cfg config.Integration) (core.Integration, error) {
-	var dest FooChat
-	if err := mapstructure.Decode(cfg.Extras, &dest); err != nil {
+	var i FooChat
+	if err := mapstructure.Decode(cfg.Extras, &i); err != nil {
 		return nil, err
 	}
-	return &dest, nil
+	return &i, nil
 }
 
 func (i *FooChat) Validate(direction core.IntegrationDirection) error {

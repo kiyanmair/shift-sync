@@ -20,11 +20,11 @@ type FooCode struct {
 }
 
 func NewFooCode(cfg config.Integration) (core.Integration, error) {
-	var src FooCode
-	if err := mapstructure.Decode(cfg.Extras, &src); err != nil {
+	var i FooCode
+	if err := mapstructure.Decode(cfg.Extras, &i); err != nil {
 		return nil, err
 	}
-	return &src, nil
+	return &i, nil
 }
 
 func (i *FooCode) Validate(direction core.IntegrationDirection) error {
