@@ -34,7 +34,13 @@ func CreateIntegrations[T Integration](
 
 		instance, ok := integ.(T)
 		if !ok {
-			errs = append(errs, fmt.Errorf("cannot use integration type %s as a %s", cfg.Type, direction))
+			errs = append(errs, fmt.Errorf("cannot use %s (type %s) as a %s", name, cfg.Type, direction))
+			continue
+		}
+
+		valid, err := integ.Valid(direction)
+		if !valid {
+			errs = append(errs, fmt.Errorf("definition for %s (type %s) is invalid: %v", name, cfg.Type, err))
 			continue
 		}
 
