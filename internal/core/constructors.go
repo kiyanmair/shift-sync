@@ -6,20 +6,6 @@ import (
 	"github.com/kiyanmair/shift-sync/internal/config"
 )
 
-type Integration interface {
-	Valid() (bool, error)
-}
-
-type Source interface {
-	Integration
-	GetUsers() ([]string, error)
-}
-
-type Destination interface {
-	Integration
-	SetUsers(users []string) error
-}
-
 func NewIntegration(config config.Integration) (Integration, error) {
 	constructor, exists := integrationRegistry[config.Type]
 	if !exists {
