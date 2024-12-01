@@ -20,15 +20,13 @@ func NewSyncer(configPath string) *Syncer {
 		log.Fatalf("Failed to load config: %v", err)
 	}
 
-	sources, srcErrs := core.CreateIntegrations(
+	sources, srcErrs := core.CreateIntegrations[core.Source](
 		cfg.Sources,
-		core.AsSource,
 		core.SourceDirection,
 	)
 
-	destinations, destErrs := core.CreateIntegrations(
+	destinations, destErrs := core.CreateIntegrations[core.Destination](
 		cfg.Destinations,
-		core.AsDestination,
 		core.DestinationDirection,
 	)
 
