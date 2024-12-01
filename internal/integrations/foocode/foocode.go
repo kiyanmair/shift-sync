@@ -27,7 +27,7 @@ func NewFooCode(cfg config.Integration) (core.Integration, error) {
 	return &i, nil
 }
 
-func (i *FooCode) Validate(direction core.IntegrationDirection) error {
+func (i *FooCode) Validate(direction core.Direction) error {
 	if i.APIKey == "" {
 		return errors.New("api_key cannot be empty")
 	}

@@ -1,7 +1,7 @@
 package core
 
 type Integration interface {
-	Validate(direction IntegrationDirection) error
+	Validate(direction Direction) error
 }
 
 type Source interface {
@@ -14,9 +14,9 @@ type Destination interface {
 	SetUsers(users []string) error
 }
 
-type IntegrationDirection string
+type Direction string
 
 const (
-	SourceDirection      IntegrationDirection = "source"
-	DestinationDirection IntegrationDirection = "destination"
+	SourceDirection      Direction = "source"
+	DestinationDirection Direction = "destination"
 )

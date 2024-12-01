@@ -27,7 +27,7 @@ func NewFooChat(cfg config.Integration) (core.Integration, error) {
 	return &i, nil
 }
 
-func (i *FooChat) Validate(direction core.IntegrationDirection) error {
+func (i *FooChat) Validate(direction core.Direction) error {
 	if i.Token == "" {
 		return errors.New("token cannot be empty")
 	}

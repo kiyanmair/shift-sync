@@ -8,7 +8,7 @@ import (
 
 func CreateIntegrations[T Integration](
 	configs map[string]config.Integration,
-	direction IntegrationDirection,
+	direction Direction,
 ) (map[string]T, []error) {
 	results := make(map[string]T)
 	var errs []error
