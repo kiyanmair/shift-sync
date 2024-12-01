@@ -6,10 +6,6 @@ import (
 	"github.com/kiyanmair/shift-sync/internal/config"
 )
 
-type Source interface {
-	GetUsers() ([]string, error)
-}
-
 func NewSource(config config.Source) (Source, error) {
 	constructor, exists := sourceRegistry[config.Type]
 	if !exists {

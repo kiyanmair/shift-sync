@@ -6,10 +6,6 @@ import (
 	"github.com/kiyanmair/shift-sync/internal/config"
 )
 
-type Destination interface {
-	SetUsers(users []string) error
-}
-
 func NewDestination(config config.Destination) (Destination, error) {
 	constructor, exists := destinationRegistry[config.Type]
 	if !exists {
