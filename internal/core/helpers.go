@@ -1,11 +1,21 @@
 package core
 
-func IsSource(i Integration) (Source, bool) {
+func AsSource(i Integration) (Source, bool) {
 	s, ok := i.(Source)
 	return s, ok
 }
 
-func IsDestination(i Integration) (Destination, bool) {
+func AsDestination(i Integration) (Destination, bool) {
 	d, ok := i.(Destination)
 	return d, ok
+}
+
+func IsSource(i Integration) bool {
+	_, ok := AsSource(i)
+	return ok
+}
+
+func IsDestination(i Integration) bool {
+	_, ok := AsDestination(i)
+	return ok
 }

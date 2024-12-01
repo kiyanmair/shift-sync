@@ -27,7 +27,7 @@ func NewSyncer(configPath string) *Syncer {
 			continue
 		}
 
-		src, ok := core.IsSource(integ)
+		src, ok := core.AsSource(integ)
 		if !ok {
 			log.Printf("Integration type %s cannot be used as a source", srcCfg.Type)
 			continue
@@ -44,7 +44,7 @@ func NewSyncer(configPath string) *Syncer {
 			continue
 		}
 
-		dest, ok := core.IsDestination(integ)
+		dest, ok := core.AsDestination(integ)
 		if !ok {
 			log.Printf("Integration type %s cannot be used as a destination", destCfg.Type)
 			continue
