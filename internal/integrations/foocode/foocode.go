@@ -32,7 +32,7 @@ func (i *FooCode) Validate(direction core.Direction) error {
 		return errors.New("api_key cannot be empty")
 	}
 	if i.TeamName == "" {
-		return errors.New("schedule_id cannot be empty")
+		return errors.New("team_name cannot be empty")
 	}
 	if direction == core.DestinationDirection {
 		if i.Role == "" {
