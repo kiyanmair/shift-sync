@@ -14,26 +14,28 @@ func CreateIntegrations[T Integration](
 	var errs []error
 
 	for name, cfg := range configs {
+		nameAndType := fmt.Sprintf("%s (type %s)", name, cfg.Type)
+
 		constructor, exists := integrationRegistry[cfg.Type]
 		if !exists {
-			errs = append(errs, fmt.Errorf("unsupported integration type: %s", cfg.Type))
+			errs = append(errs, fmt.Errorf("integration %s is not supported", nameAndType))
 			continue
 		}
 
 		integ, err := constructor(cfg)
 		if err != nil {
-			errs = append(errs, fmt.Errorf("failed to construct integration: %w", err))
+			errs = append(errs, fmt.Errorf("failed to construct %s: %w", nameAndType, err))
 			continue
 		}
 
 		instance, ok := integ.(T)
 		if !ok {
-			errs = append(errs, fmt.Errorf("cannot use %s (type %s) as a %s", name, cfg.Type, direction))
+			errs = append(errs, fmt.Errorf("cannot use %s as a %s", nameAndType, direction))
 			continue
 		}
 
 		if err := integ.Validate(direction); err != nil {
-			errs = append(errs, fmt.Errorf("definition for %s (type %s) is invalid: %v", name, cfg.Type, err))
+			errs = append(errs, fmt.Errorf("definition for %s is invalid: %v", nameAndType, err))
 			continue
 		}
 
