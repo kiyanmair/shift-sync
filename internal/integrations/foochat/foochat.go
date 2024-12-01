@@ -1,4 +1,4 @@
-package destination
+package foochat
 
 import (
 	"errors"
