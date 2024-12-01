@@ -2,7 +2,7 @@
 
 Shift Sync is a tool for syncing users between arbitrary systems.
 Any system can be integrated as long as it can get and/or set email addresses.
-However, the primary focus is on syncing on-shift users from scheduling systems to taggable sources.
+However, the primary focus is on syncing on-shift users from scheduling systems to taggable resources.
 
 The guiding principle of Shift Sync's design is that implementing integrations should be easy.
 We welcome contributions, especially for adding or improving integrations.
